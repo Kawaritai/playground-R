@@ -25,3 +25,15 @@
     | -- Typing main() returns you to swirl's main menu.
     | -- Typing info() displays these options again.
     ```
+- **Swirl Courses**:
+  - Installation:
+    ```R
+    library(swirl)
+    install_course("Course Name Here")
+    swirl()
+    ```
+  - **"R Programming"**: A foundational course covering R’s syntax, data types, and basic functions.
+  - **"Getting and Cleaning Data"**: Focuses on practical data handling, including tidying and preprocessing techniques.
+  - **"Exploratory Data Analysis"**: Introduces data visualization and summarization methods to understand your datasets.
+  - **"Statistical Inference"**: Covers hypothesis testing and confidence intervals to build a strong statistical foundation.
+  - **"Regression Models"**: Provides an introduction to linear and logistic regression along with model interpretation.
