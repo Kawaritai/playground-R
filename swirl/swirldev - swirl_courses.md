@@ -1,6 +1,15 @@
 # `swirldev/swirl_courses`
 
 - URL: https://github.com/swirldev/swirl_courses
+- Installation:
+  ```R
+  # 1. Make sure you have a recent version version of swirl:
+  install.packages("swirl")
+  # 2. Enter the following from the R console, substituting the name of the course that you wish to install:
+  library(swirl)
+  install_course("Course Name Here")
+  swirl()
+  ```
 
 ## 1) R Programming
 
