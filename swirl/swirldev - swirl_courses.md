@@ -74,21 +74,51 @@
   - Anonymous functions: not named
     - `function(x){x+1}`, for example
   - Just as in `?paste`, the ellipsis, `...` means any number of arguments to be passed
-- [ ] 10: `lapply` and `sapply`
-  <!-- - `lapply` and `sapply` are the two most important members of R's *apply family of functions, also known as loop functions.
+- [x] 10: `lapply` and `sapply`
+  - `lapply` and `sapply` are the two most important members of R's \*apply family of functions, also known as loop functions.
   - Used for **Split-Apply-Combine strategy** for data analysis
-    - Each of the *apply functions will **SPLIT** up some data into smaller pieces,
-    - **APPLY** a function to each piece, 
-    - then **COMBINE** the results. 
+    - EACH (!) of the \*apply functions will **SPLIT** up some data into smaller pieces,
+    - **APPLY** a function to each piece,
+    - then **COMBINE** the results.
     - (A more detailed discussion of this strategy is found in Hadley Wickham's Journal of Statistical Software paper titled 'The Split-Apply-Combine Strategy for Data Analysis'.)
-  - `lapply`: list apply a (data, func)
-  - `sapply`: simplifyt list
-  - If `cls_list` is a list of character vectors,  -->
-- [ ] 11: `vapply` and `tapply`
-- [ ] 12: Looking at Data
-- [ ] 13: Simulation
-- [ ] 14: Dates and Times
-- [ ] 15: Base Graphics
+  - `lapply`: list apply a (data, func). Returns list of same length (with dim = 0 and same length
+    - It _is_ a list, doesn't it kind of act like a vector? (nah. in this case, the return object is a list with keys assigned to single character vectors)
+  - You can think of:
+    - [] as "give me a sublist containing these elements"
+    - [[]] as "follow this name/index to its destination and give me what's there"
+  - `sapply`: simplify list. It can be used similarly to `lapply`, but will try simplify the result for you, if the result plays nice. 
+  - If `cls_list` is a list of character vectors,
+- [x] 11: `vapply` and `tapply`
+  - `vapply`: similar to `sapply`, but has a pre-defined type of return value. For safety and speed. Think `v` for helicopter-parenting the return Value.
+    - Okay, so in R, it's characters not strings
+  - `tapply`: Apply a function to each cell of a ragged array. Think, table-apply because we can break down the X and INDEX using `table` to see what we're working with.
+    - "The function factor is used to encode a vector as a factor (the terms ‘category’ and ‘enumerated type’ are also used for factors)."
+    - use tapply() to split your data into groups based on the value of some variable, then apply a function to each group
+- [x] 12: Looking at Data
+  - Aaaand `str()` is not string but "structure"! It concisely combines many features of other functions, like `summary()` and `head/last` and `class` and `dim`...
+- [x] 13: Simulation
+  - `sample(x)` is shorthand for permuting the elements (when you exclude size and default replace = FALSE)
+  - use `replicate(n, distribution)` to repeat an operation `n` times, like taking multiple group samples
+  - use `colMeans` to take the mean over each column of, for instance, a matrix of arrays. For a matrix of dim `5 100`, taking `colMeans` returns a numeric vector
+- [x] 14: Dates and Times
+  - Dates are represented by the 'Date' class and times are represented by the 'POSIXct' and 'POSIXlt' classes. 
+    - Internally, dates are stored as the number of days since 1970-01-01 and times are stored as either the number of seconds since 1970-01-01 (for 'POSIXct') or a list of seconds, minutes, hours, etc. (for 'POSIXlt').
+  - If something is wrapped in a class, like a "Date", use `unclass()` to view internals
+     - For instance, R **internally** stores dates by number of days since 1970-01-01. Also stores negative numbers
+  - `Sys.Date()` and `Sys.time()` and `as.Date("formatted character")`
+    - The `Sys.time()` is by default `POSIXct` (Calendar Time) class -- stored by seconds since the reference
+    - `POSIXlt` (Local Time) is more detailed, with names
+  - `weekdays()`, `months()`, `quarters()`...
+    - _"What month is it?", "You mean... what quarter?"_
+  - `strptime()` converts character vectors to POSIXlt. Kind of a more lenient `as.POSIXlt()`
+  - Use arithmetic operators as expected
+    - `Sys.time() > t1`
+    - `difftime(Sys.time(), t1, units = 'days')`
+    
+- [x] 15: Base Graphics
+  - `plot` is short for scatterplot.. huh.
+  - Introduced `par()` and `points` but... with no other exercises _for_ them?
+  - If you want to explore other elements of base graphics, then this web page (http://www.ling.upenn.edu/~joseff/rstudy/week4.html) provides a useful overview.
 
 ## 2) Getting and Cleaning Data
 
