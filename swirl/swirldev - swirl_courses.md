@@ -11,10 +11,16 @@
   swirl()
   ```
 
+
 ## 1) R Programming
 
-- Start: 07/01/2025
+- **Start**: 07/01/2025
+- **Command**: 
+  ```R 
+  install_course("R Programming")
+  ```
 
+### Notes
 - [x] 1: Basic Building Blocks
   - R does broadcasting or "recycling", so some things just work how we expect them to
   - `c()` to create vectors. Means combine or concatenate
@@ -129,18 +135,50 @@
   - Introduced `par()` and `points` but... with no other exercises _for_ them?
   - If you want to explore other elements of base graphics, then this web page (http://www.ling.upenn.edu/~joseff/rstudy/week4.html) provides a useful overview.
 
+
 ## 2) Getting and Cleaning Data
 
-N/A
+- **Start**: N/A
+- **Command**: 
+  ```R 
+  install_course("Getting and Cleaning Data")
+  ```
+
+### Notes
+- N/A
+
 
 ## 3) Exploratory Data Analysis
 
-N/A
+- **Start**: N/A
+- **Command**: 
+  ```R 
+  install_course("Exploratory Data Analysis")
+  ```
+
+### Notes
+- N/A
+
 
 ## 4) Statistical Inference
 
-N/A
+- **Start**: N/A
+- **Command**: 
+  ```R 
+  install_course("Statistical Inference")
+  ```
+
+### Notes
+- N/A
+
 
 ## 5) Regression Models
 
-N/A
+- **Start**: N/A
+- **Command**: 
+  ```R 
+  install_course("Regression Models")
+  ```
+
+### Notes
+- N/A
