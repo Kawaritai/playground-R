@@ -142,7 +142,7 @@
 - **Command**: 
   ```R 
   install_course("Getting and Cleaning Data")
-  ```\
+  ```
 - Key packages: `dplyr`, `tidyr`, `lubridate`
 
 ### Notes
