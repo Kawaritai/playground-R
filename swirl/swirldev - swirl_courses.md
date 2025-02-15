@@ -145,7 +145,10 @@
   ```
 
 ### Notes
-- N/A
+- [] 1: Manipulating Data with dplyr
+- [] 2: Grouping and Chaining with dplyr
+- [] 3: Tidying Data with tidyr
+- [] 4: Dates and Times with lubridate
 
 
 ## 3) Exploratory Data Analysis
