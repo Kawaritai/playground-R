@@ -54,7 +54,7 @@
   - `x[is.na(x)]` returns a vector with all NAs (Why? Because `is.na()` tells you where the NAs are)
   - R does 1-based indexing :|
   - `x[c(-2, -10)]` or `x[-c(2, 10)]` gives all elements EXCEPT at idx 2 and 10
-- [ ] 7: Matrices and Data Frames
+- [x] 7: Matrices and Data Frames
   - "**Matrices** can only contain a single class of data, while **data frames** can consist of many different classes of data."
   - A vector has NULL dimensions.
   - `dim()` can check dimensions or be used to assign
@@ -142,14 +142,83 @@
 - **Command**: 
   ```R 
   install_course("Getting and Cleaning Data")
-  ```
+  ```\
+- Key packages: `dplyr`, `tidyr`, `lubridate`
 
 ### Notes
-- [] 1: Manipulating Data with dplyr
-- [] 2: Grouping and Chaining with dplyr
-- [] 3: Tidying Data with tidyr
-- [] 4: Dates and Times with lubridate
-
+- [x] 1: Manipulating Data with `dplyr`
+  - `dplyr` is for manipulating tabular data from a variety of sources (data frames, data tables, databases, multidim. arrays)
+    - Think: Dataframe-pliers
+  - In using `dplyr`, the first step is to load the data into a "data frame tbl" or `tbl_df`. You can use the function `tbl_df()`. 
+    - Colloquially, we call this a `tibble`: referring to a data frame that has the `tbl_df` class
+  - Core philosophy: small functions that each do one thing well.
+    - `dplyr` supplies five 'verbs' that cover most fundamental data manipulation tasks: `select()`, `filter()`, `arrange()`, `mutate()`, and `summarize()`
+    - E.g. use `select()` rather than `tbl_df()$attr1`, `tbl_df()$attr2`, `tbl_df()$attr3`. Additionally, you can use the `:` operator as logically. 
+  - Think: `select()` to choose from columns; `filter()` to choose from rows.
+  - `arrange()` orders rows and is ascending by default:
+    - Asc: `arrange(tbl_df(), col1)`
+    - Desc: `arrange(tbl_df(), desc(col1))`
+  - `mutate()` creates new columns that are functions of existing variables. 
+    - This, as with all previous functions, doesn't modify the original `tbl_df` -- it returns a new one. 
+  - `summarize()` collapses the dataset to a single row. 
+    - Akin to aggregate functions in SQL and `GROUP_BY`, sort of.
+    - "The idea is that `summarize()` can give you the requested value FOR EACH group in your dataset."
+- [x] 2: Grouping and Chaining with `dplyr`
+  - In this lesson, we go into the `summarize()` aggregating function. 
+  - `group_by(tbl_df, attr)` converts an existing tibble into a **grouped tibble** where operations are performed "by group"
+    - `ungroup()` removes the grouping
+    - Doesn't look different in the console, except you see `Groups: attr`
+    - We can further use `summarize()` on the grouped table to apply aggregate operations by-grouping. 
+    - `n()`, `n_distinct(notgroupattr)`, `mean(notgroupattr)` are examples. In particular, `n()` gives the current group size (e.g. you can use it to count instances within a group)
+  - `quantile(pack_sum$count, probs = 0.99)` to get the 99% sample quantile based on the `count` value (size of groups, in this case). 
+  - `View(tibble)` to open a View of the data. Capitalised.
+  - Chaining allows you to string together multiple function calls in a way that is compact and readable. 
+    - Advantage: We don't have to store intermediate results. 
+  - `%>%` is the chaining operator. You can pronounce it as "then"
+    - `?chain` for documentation
+    - `left %>% right`: the code on the right operates on the output of the left. 
+    - Notably, we don't need to specify the dataset. E.g. `select(cran, ...)` is `cran %>% select(...)`
+    - In fact, at the end, you can just write `%>% print()`
+    - Start chaining by specifying the dataset or assign by `variable <- tibble %>% chaining....`
+- [x] 3: Tidying Data with `tidyr`
+  - "This paper should be required reading for anyone who works with data, but it's not required in order to complete this lesson": [http://vita.had.co.nz/papers/tidy-data.pdf](http://vita.had.co.nz/papers/tidy-data.pdf)
+    - Okay but it's 24 pages
+    - [ ] TODO: Read.
+  - Tidy data is formatted in a standard way that facilitates exploration and analysis and works seamlessly with other tidy data tools. Specifically, tidy data satisfies three conditions:
+    1. Each variable forms a column
+    2. Each observation forms a row
+    3. Each type of observational unit forms a table
+  - "Messy" data doesn't satisfy these conditions. 
+  - `gather(data, key="", value="", ...,)` makes wide data longer.
+    - `key` is the new column that the previous column names (as selected) inhabit
+    - `value` is the new column that the previous column values (as selected) inhabit
+    - `...` represents the column selection (e.g. `2:3`, `attr`, `-attr`, `attr1:attr2`)
+    - Aside: `key` and `value` support quasiquotation -- so they could be strings, or not! Life is meaningless. 
+  - `spread()` separates one column into multiple columns on a separator.
+    - In the tutorial, `separate(res, sex_class, into=c("sex", "class"))` works because the `sep` argument splits on non-alphanumeric values by default (e.g. originally `class_1` and `class_2`)
+  - The last two problems covered in this tutorial are 1) multiple observational units in the same table, and 2) a single observational unit stored in multiple tables.
+    - For 1), we simply use `select` to make multiple tables. We may use `unique()` call when applicable.
+    - For 2), we used mutate per table to add a specific column (same name in both tables, but different constant value). Then use `bind_rows()` to bind any number of data frames by row, making a longer result (useful to just read its docs)
+  - **Summary** (from online)
+    - `gather()` makes “wide” data longer
+    - `spread()` makes “long” data wider
+    - `separate()` splits a single column into multiple columns
+    - `unite()` combines multiple columns into a single column
+- [x] 4: Dates and Times with `lubridate`
+  - Fortunately, lubridate offers a variety of functions for **parsing date-times**. These functions take the form of `ymd()`, `dmy()`, `hms()`, `ymd_hms()`, etc., where each letter in the name of the function stands for the location of years (`y`), months (`m`), days (`d`), hours (`h`), minutes (`m`), and/or seconds (`s`) in the date-time being read in.
+    - Which function do you use? --> What format is the original string in, in order?
+    - It's pretty dynamic! See `dmy(25081985)`
+    - E.g.: `ymd_hms("2014-08-23 17:23:02")`
+  - `update()` to update one or more components of a date-time
+    - `update(this_moment, hours = 8, minutes = 34, seconds = 55)` does not actually alter `this_moment` unless assigned.
+    - For a complete list of valid time zones for use with lubridate, check out the following Wikipedia page: [http://en.wikipedia.org/wiki/List_of_tz_database_time_zones](http://en.wikipedia.org/wiki/List_of_tz_database_time_zones)
+  - Logical arithmetic operations. To add two days, use `my_date + days(2)`
+  - `with_tz()` to change the time zone view. The function returns a date-time as it would appear in a different time zone.
+    - `with_tz(tz)` where `tz = "America/New_York", "Asia/Hong_Kong", ...` etc. See the Wikipedia link!
+  - `interval(start, end, tzone = tz(start))`: creates an `Interval` object with the specified start and end dates.
+    - `as.period(Interval)` to express the time period between start and end. 
+  - In general, complexities with time periods arise due to leap years, leap seconds, daylight savings, etc. Hence, in `lubridate`, we have four classes of time-related objects: `instants`, `intervals`, `durations`, and `periods`
+    - you can find a complete discussion in the 2011 Journal of Statistical Software paper titled 'Dates and Times Made Easy with lubridate'
 
 ## 3) Exploratory Data Analysis
 
