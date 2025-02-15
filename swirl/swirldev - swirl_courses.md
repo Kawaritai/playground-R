@@ -14,9 +14,9 @@
 
 ## 1) R Programming
 
-- **Start**: 07/01/2025
+- **Start**: 07/02/2025
 - **Command**: 
-  ```R 
+  ```R
   install_course("R Programming")
   ```
 
@@ -138,7 +138,7 @@
 
 ## 2) Getting and Cleaning Data
 
-- **Start**: N/A
+- **Start**: 15/02/2025ß
 - **Command**: 
   ```R 
   install_course("Getting and Cleaning Data")
