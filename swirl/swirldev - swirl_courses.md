@@ -229,7 +229,30 @@
   ```
 
 ### Notes
-- N/A
+- [x] 1: Principles of Analytic Graphs
+   - Principle 1: Show comparisons
+   - Principle 2: Show causality, mechanism, explanation
+   - Principle 3: Show multivariate data
+   - Principle 4: Integrate multiple modes of evidence
+   - Principle 5: Describe and document the evidence
+   - Principle 6: Content is king
+- [ ] 2: Exploratory Graphs
+  - `with(dataset, plot(property, property,...))`
+  - `subset(dataset, condition w property)`
+  - Give graphs a rug! `rug(...)`
+- [x] 3: Graphics Devices in R
+- [ ] 4: Plotting Systems
+- [ ] 5: Base Plotting System
+- [ ] 6: Lattice Plotting System
+- [ ] 7: Working with Colors
+- [ ] 8: GGPlot2 Part1
+- [ ] 9: GGPlot2 Part2
+- [ ] 10: GGPlot2 Extras
+- [ ] 11: Hierarchical Clustering
+- [ ] 12: K Means Clustering
+- [ ] 13: Dimension Reduction
+- [ ] 14: Clustering Example
+- [ ] 15: CaseStudy
 
 
 ## 4) Statistical Inference
