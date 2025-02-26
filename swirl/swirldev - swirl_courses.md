@@ -236,15 +236,51 @@
    - Principle 4: Integrate multiple modes of evidence
    - Principle 5: Describe and document the evidence
    - Principle 6: Content is king
-- [ ] 2: Exploratory Graphs
+- [x] 2: Exploratory Graphs
   - `with(dataset, plot(property, property,...))`
   - `subset(dataset, condition w property)`
   - Give graphs a rug! `rug(...)`
 - [x] 3: Graphics Devices in R
-- [ ] 4: Plotting Systems
-- [ ] 5: Base Plotting System
-- [ ] 6: Lattice Plotting System
-- [ ] 7: Working with Colors
+  - `?Devices` to see graphics devices that are available on R
+  - Two basic types of file devices: Vector and bitmap devices
+  - Use `dev.cur()` and `dev.set()` to see graphics devices. `dev.off()` to close current device. `dev.copy()` exists. 
+- [x] 4: Plotting Systems
+  - There are three main plotting systems in R: base, lattice, and ggplot
+  - 1: Base Plotting System (comes with R)
+    - Based on an artist's palette
+    - Chain of simply commands, however, it's hard to go back
+    - Tedious but flexible
+  - 2: Lattice System (`lattice`)
+    - Based on single function calls: `xyplot`, `bwplot`...
+    - Sadly, harder to annotate and not "additive" in the same way as base.
+    - `table(dataset$property)` to summarise an attribute from a dataset (tabulating it, I guess?)
+  - 3: GGPlot2 System
+    - Best of both worlds... you can using `adding` to annotate a plot
+    - Based on a "grammar of graphics" (`gg`)
+- [x] 5: Base Plotting System
+  - Basically split into two parts: `base` for plotting functions, `grDevices` to interact with different graphic devices
+  - Learn more about `par()`: Without calling anything, it returns a list, which means you can use `length(par())` and `names(par())`
+  - `colors()` colors by name 
+  - `pch` can be specified with integers for different scatter point shapes ("characters)
+  - `dev.off()` or `plot.new()` to reset to the defaults for `par`
+  - `mtitle()` for an outer, more-main-er title
+- [x] 6: Lattice Plotting System
+  - Lattice comes in two packages: `lattice` and `grid` (you can mostly ignore the latter)
+  - R Formula Syntax: https://www.econometrics.blog/post/the-r-formula-cheatsheet/
+    - `~` means a relationship between two variables 
+    - `|` is used for conditioning (consider separately)
+  - `y ~ x` can be thought of as, "regress y on x"
+  - In `lattice`, plot functions actually return a `trellis` object that can be printed to be displayed
+  - Setting `strip=FALSE` removes the labels on conditioned graphs
+- [x] 7: Working with Colors
+  - `sample(colors(), 10)` to see some colour names
+  - `colorRamp()` takes a palette of colours (args) and returns a function that takes values between 0 and 1 as arguments.
+    - E.g. `colorRap(c("red", "blue"))`
+  - `colorRampPalette()` slightly modified the returned function. Instead of returning a colour, given a input within the [0, 1] range, this function takes an integer `n` and returns `n` colours.
+  - So, `p0(seq(0, 1, len=6))` and `p1(6)` are equivalent (where `p0, pq` are the return functions after a colour palette is defined. )
+  - `RColorBrewer` package contains useful color palettes that are sequential, divergent, and qualitative. 
+    - `cols <- brewer.pal(3, "BuGn");  pal <- colorRampPalette(cols)`
+    - `cols <- brewer . palette (num colors, palette name)`
 - [ ] 8: GGPlot2 Part1
 - [ ] 9: GGPlot2 Part2
 - [ ] 10: GGPlot2 Extras
